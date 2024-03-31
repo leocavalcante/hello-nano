@@ -1,0 +1,47 @@
+name: Trigger auto deployment for hello-nano
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/hello-nano-AutoDeployTrigger-f08c0e74-9b71-4052-a3c6-ecb208c12323.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.HELLONANO_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.HELLONANO_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.HELLONANO_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: ghcr.io
+          registryUsername: ${{ secrets.HELLONANO_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.HELLONANO_REGISTRY_PASSWORD }}
+          containerAppName: hello-nano
+          resourceGroup: Default
+          imageToBuild: ghcr.io/hello-nano:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+
