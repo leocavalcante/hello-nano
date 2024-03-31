@@ -10,7 +10,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $app = AppFactory::createBase(port: 8080);
 
 $app->get('/', function () {
-    return 'Hello, Nano!';
+    return 'Hello, Single RUN!';
 });
 
 $app->run();
