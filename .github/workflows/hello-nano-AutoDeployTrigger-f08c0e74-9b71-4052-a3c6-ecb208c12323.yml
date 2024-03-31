@@ -40,7 +40,7 @@ jobs:
           registryPassword: ${{ secrets.HELLONANO_REGISTRY_PASSWORD }}
           containerAppName: hello-nano
           resourceGroup: Default
-          imageToBuild: ghcr.io/hello-nano:${{ github.sha }}
+          imageToBuild: ghcr.io/leocavalcante/hello-nano:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
 
