@@ -2,11 +2,13 @@
     "name": "opencodeco/codespaces-php",
     "type": "project",
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "hyperf/nano": "^2.0"
+    },
     "scripts": {
         "start": [
             "Composer\\Config::disableProcessTimeout",
-            "php -S 0.0.0.0:8080 -t public"
+            "./app start"
         ]
     }
 }
