@@ -1,7 +1,8 @@
 {
     "image": "opencodeco/phpctl:php83-devcontainer",
     "features": {
-      "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+      "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+      "ghcr.io/dapr/cli/dapr-cli:0": {}
     },
     "hostRequirements": {
       "cpus": 4
