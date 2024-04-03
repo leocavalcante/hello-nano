@@ -6,5 +6,5 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposi
     && composer install --prefer-dist --no-dev --optimize-autoloader \
     && dapr init --slim
 ENTRYPOINT [ "dapr" ]
-CMD [ "run", "--dapr-http-port", "3500", "--app-id", "hello-nano", "--app-port", "8080",  "--", "./app", "start"]
+CMD [ "run", "--resources-path", "./components/local/", "--dapr-http-port", "3500", "--app-id", "hello-nano", "--app-port", "9501",  "--", "./app", "start"]
 EXPOSE 3500
