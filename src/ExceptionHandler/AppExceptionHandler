@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\ExceptionHandler;
+
+use Hyperf\Codec\Json;
+use Hyperf\ExceptionHandler\ExceptionHandler;
+
+final class AppExceptionHandler extends ExceptionHandler
+{
+    public function handle(Throwable $throwable, ResponseInterface $response)
+    {
+        $body = Json::encode([
+            'error' => true,
+            'message' => $throwable->getMessage(),
+        ]);
+
+        return $response
+            ->withStatus(500)
+            ->withHeader('Content-Type', 'application/json')
+            ->withBody(new SwooleStream($body));
+    }
+
+    public function isValid(Throwable $throwable): bool
+    {
+        return true;
+    }
+}

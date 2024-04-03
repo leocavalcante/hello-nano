@@ -7,28 +7,17 @@
     "hostRequirements": {
       "cpus": 4
     },
-    "waitFor": "onCreateCommand",
-    "updateContentCommand": "composer install",
-    "postCreateCommand": "",
-    "postAttachCommand": {
-      "server": "composer start"
-    },
     "customizations": {
-      "codespaces": {
-        "openFiles": [
-          "public/index.php"
-        ]
-      },
       "vscode": {
           "extensions": [
-              "phpactor.vscode-phpactor"
-          ]
+            "phpactor.vscode-phpactor",
+            "ms-azuretools.vscode-dapr"
+        ]
       }
     },
     "portsAttributes": {
       "8080": {
-        "label": "Application",
-        "onAutoForward": "openPreview"
+        "label": "Application"
       }
     },
     "forwardPorts": [8080]

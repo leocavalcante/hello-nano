@@ -4,15 +4,28 @@
     "minimum-stability": "stable",
     "require": {
         "hyperf/nano": "^2.0",
-        "dapr/php-sdk": "^1.2"
+        "hyperf/guzzle": "^3.1",
+        "monolog/monolog": "^3.5"
     },
     "scripts": {
         "start": [
             "Composer\\Config::disableProcessTimeout",
-            "dapr run --dapr-http-port 3500 --app-id hello-nano --app-port 9501 -- ./app start"
-        ]
+            "dapr run --dapr-http-port 3500 --resources-path ./components/local/ --app-id hello-nano --app-port 9501 -- ./app start"
+        ],
+        "test": "phpunit"
     },
     "require-dev": {
-        "swoole/ide-helper": "^5.1"
+        "swoole/ide-helper": "^5.1",
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
     }
 }

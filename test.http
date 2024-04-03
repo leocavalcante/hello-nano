@@ -1,3 +1,7 @@
 @appId = "hello-nano"
 
-GET http://localhost:3500/v1.0/invoke/hello-nano/method/
+GET http://localhost:3500/v1.0/invoke/hello-nano/method/?key=foo&val=baz
+
+### 
+
+GET http://localhost:3500/v1.0/invoke/hello-nano/method/?key=foo
