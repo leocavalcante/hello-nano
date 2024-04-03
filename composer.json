@@ -10,7 +10,7 @@
     "scripts": {
         "start": [
             "Composer\\Config::disableProcessTimeout",
-            "dapr run --dapr-http-port 3500 --resources-path ./components/local/ --app-id hello-nano --app-port 9501 -- ./app start"
+            "dapr run --dapr-http-port 3500 --resources-path .dapr --app-id hello-nano --app-port 9501 -- ./app start"
         ],
         "test": "phpunit"
     },
