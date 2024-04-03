@@ -3,39 +3,23 @@
 
 declare(strict_types=1);
 
-namespace App;
-
 use App\ExceptionHandler\AppExceptionHandler;
-use Dapr\Client\DaprClient;
 use GuzzleHttp\Client;
-use Hyperf\Contract\ConfigInterface;
-use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Engine\Contract\Http\V2\ClientFactoryInterface;
-use Hyperf\Engine\Contract\Http\V2\ResponseInterface as HyperfResponseInterface;
-use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\ExceptionHandler\Handler\WhoopsExceptionHandler;
-use Hyperf\Framework\Logger\StdoutLogger;
 use Hyperf\Guzzle\ClientFactory;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Nano\Factory\AppFactory;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Swoole\Coroutine;
-
-use function Hyperf\Support\make;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $logger = new Logger('app', [new StreamHandler('php://stdout')]);
 
 $app = AppFactory::createBase(dependencies: [
-    LoggerInterface::class => $logger,
+    LoggerInterface::class => static fn(ContainerInterface $container): Logger => $logger,
 ]);
-
 
 $app->addExceptionHandler(AppExceptionHandler::class);
 
