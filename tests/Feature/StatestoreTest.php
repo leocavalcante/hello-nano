@@ -7,12 +7,13 @@ namespace Test\Feature;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use function Hyperf\Support\env;
 
 final class StatestoreTest extends TestCase
 {
     public function testSaveAndGet(): void
     {
-        $http = new Client(['base_uri' => 'http://localhost:3500']);
+        $http = new Client(['base_uri' => env('DAPR_HOST', 'http://localhost:3500')]);
 
         $res = $http->get('/v1.0/invoke/hello-nano/method/?key=foo&val=bar');
 
