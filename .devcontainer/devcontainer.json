@@ -4,9 +4,6 @@
       "ghcr.io/devcontainers/features/docker-in-docker:2": {},
       "ghcr.io/dapr/cli/dapr-cli:0": {}
     },
-    "hostRequirements": {
-      "cpus": 4
-    },
     "customizations": {
       "vscode": {
           "extensions": [
@@ -15,10 +12,5 @@
         ]
       }
     },
-    "portsAttributes": {
-      "8080": {
-        "label": "Application"
-      }
-    },
-    "forwardPorts": [8080]
+    "forwardPorts": [3500, 9501]
 }
